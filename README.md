@@ -8,10 +8,11 @@ API gateway that fronts TMDB, exposes movie endpoints for the Next.js client, an
 ```bash
 npm install
 ```
-2) Configure env
+2) Configure env (dev)
 ```bash
-cp .env.example .env
-# set TMDB_API_KEY and DATABASE_URL (Mongo connection string)
+# ใช้ .env.development เป็นไฟล์หลักสำหรับ dev (NODE_ENV=development)
+# คีย์สำคัญ: PORT, FRONTEND_URL, CORS_ORIGINS, TMDB_API_KEY, DATABASE_URL
+cp .env.example .env.development
 ```
 3) Generate Prisma client
 ```bash
@@ -19,8 +20,12 @@ npx prisma generate
 ```
 4) Run locally (port defaults to 4000)
 ```bash
-npm run start:dev
+NODE_ENV=development npm run start:dev
 ```
+
+### Production env
+- ใส่ค่าจริงใน `.env.production` (เช่น FRONTEND_URL โดเมนหลัก, CORS_ORIGINS สำหรับ origin เพิ่ม, TMDB_API_KEY, DATABASE_URL ของ prod)
+- รันด้วย `NODE_ENV=production` (ตัว Nest จะเลือก `.env.production` ก่อน แล้ว fallback `.env`)
 
 ## API surface
 
