@@ -72,7 +72,7 @@ export class MoviesService {
     } catch (error) {
       this.logger.error(
         `Failed to get movie detail for id=${id}`,
-        error as Error,
+        (error as Error).stack,
       );
       if (error instanceof NotFoundException) {
         throw error;

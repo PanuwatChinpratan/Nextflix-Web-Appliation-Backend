@@ -39,12 +39,10 @@ export class PrismaFavoritesRepository implements FavoritesRepository {
   }
 
   async remove(userId: string, movieId: number): Promise<void> {
-    await this.prisma.favorite.delete({
+    await this.prisma.favorite.deleteMany({
       where: {
-        user_movie_unique: {
-          userId,
-          movieId,
-        },
+        userId,
+        movieId,
       },
     });
   }
